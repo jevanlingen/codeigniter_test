@@ -6,6 +6,7 @@ class Books extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('books_model');
+		$this->session_data = $this->user_login->check_page_is_allowed();
 	}
 	
 	public function main()
@@ -35,14 +36,21 @@ class Books extends CI_Controller {
 		$data = $this->books_model->general();
 		
 		if((int)$id > 0){
-			$query = $this->books_model->get($id);
-			$data['fid']['value'] = $query['id'];
-			$data['ftitle']['value'] = $query['title'];
-			$data['fauthor']['value'] = $query['author'];
-			$data['fpublisher']['value'] = $query['publisher'];
-			$data['fyear']['value'] = $query['year'];
+			$book = $this->books_model->get($id);
 			
-			if($query['available']=='yes')
+			if(empty($book) OR $book['user_id'] !== $this->session_data['id'])
+			{
+				$this->main();
+				return FALSE;
+			}
+						
+			$data['fid']['value'] = $book['id'];
+			$data['ftitle']['value'] = $book['title'];
+			$data['fauthor']['value'] = $book['author'];
+			$data['fpublisher']['value'] = $book['publisher'];
+			$data['fyear']['value'] = $book['year'];
+			
+			if($book['available']=='yes')
 			{
 				$data['favailable']['checked'] = TRUE;
 			} else
@@ -50,7 +58,7 @@ class Books extends CI_Controller {
 				$data['favailable']['checked'] = FALSE;	  
 			}
 		
-			$data['fsummary']['value'] = $query['summary'];
+			$data['fsummary']['value'] = $book['summary'];
 		}
 		
 		$this->load->view('books/books_input', $data);

@@ -50,6 +50,8 @@ class Books_model extends CI_Model {
 	
 	function entry_insert()
 	{
+		$session_data = $this->session->userdata('logged_in');
+		
 		$data = array(
 				  'title'=>$this->input->post('title'),
 				  'author'=>$this->input->post('author'),
@@ -57,6 +59,7 @@ class Books_model extends CI_Model {
 				  'year'=>$this->input->post('year'),
 				  'available'=>$this->input->post('available'),
 				  'summary'=>$this->input->post('summary'),
+				  'user_id'=>$session_data['id']
 				);
 		$this->db->insert('books',$data);
 	}
@@ -65,7 +68,8 @@ class Books_model extends CI_Model {
 	{
 		$this->load->library('table');
 	
-		$query = $this->db->query('SELECT * FROM books');
+		$session_data = $this->session->userdata('logged_in');
+		$query = $this->db->query('SELECT id, title, author, publisher, year, available, summary FROM books WHERE user_id = "'.$session_data['id'].'"');
 		
 		$array = array_values($query->result_array());
 		
@@ -87,6 +91,7 @@ class Books_model extends CI_Model {
 	
 	 function get($id)
 	 {
+		//$session_data = $this->session->userdata('logged_in')
 		$query = $this->db->get_where('books',array('id'=>$id));
 		return $query->row_array();		  
 	 }
@@ -109,6 +114,12 @@ class Books_model extends CI_Model {
 	 
 	 function delete($id)
 	 {
-		$this->db->delete('books',array('id'=>$id));
+		$session_data = $this->session->userdata('logged_in');
+		$query = $this->db->get_where('books',array('id'=>$id, 'user_id'=>$session_data['id']));
+		
+		if($query->num_rows() > 0)
+		{
+			$this->db->delete('books',array('id'=>$id));
+		}
 	 }
 }

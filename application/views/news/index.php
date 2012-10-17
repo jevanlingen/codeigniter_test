@@ -1,4 +1,4 @@
-<a href="create">Add new article</a>
+<a href="news/create">Add new article</a>
 <hr />
 
 <?php foreach ($news as $news_item): ?>
@@ -7,6 +7,6 @@
     <div id="main">
         <?php echo $news_item['text'] ?>
     </div>
-    <p><a href="view/<?php echo $news_item['slug'] ?>">View article</a></p>
+    <p><a href="news/view/<?php echo $news_item['slug'] ?>">View article</a></p>
 
 <?php endforeach ?>

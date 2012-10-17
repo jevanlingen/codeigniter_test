@@ -5,6 +5,7 @@ class News extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('news_model');
+		$this->user_login->check_page_is_allowed();
 	}
 	
 	public function create()
@@ -27,7 +28,7 @@ class News extends CI_Controller
 		else
 		{
 			$this->news_model->set_news();
-			$this->index();
+			redirect('news');
 		}
 	}
 

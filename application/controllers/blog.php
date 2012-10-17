@@ -6,6 +6,7 @@ class Blog extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('blog_model');
+		$this->user_login->check_page_is_allowed();
 	}
 
 	public function index()

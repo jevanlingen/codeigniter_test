@@ -13,3 +13,4 @@
 	<input type="submit" name="submit" value="Create news item" /> 
 
 </form>
+<p>Go back to <?=anchor("news","all news")?></p>
