@@ -2,6 +2,8 @@
 <html lang="en">
  <head>
    <title>Simple Login with CodeIgniter</title>
+   <link rel="stylesheet" href="http://localhost/CodeIgniter_2.1.2/960.css">
+   <link rel="stylesheet" href="http://localhost/CodeIgniter_2.1.2/mystyles.css">
    <script type="text/javascript" src="http://localhost/CodeIgniter_2.1.2/js/jquery-1.8.2.min.js"></script>
  </head>
  <body>
@@ -13,37 +15,41 @@
 			});
 		});
 	</script>
- 
-   <h1>Simple Login with CodeIgniter</h1>
-   <?= validation_errors() ?>
-   <?= $message ?>
-   <?php echo form_open('Login/login'); ?>
-     <label for="username">Username:</label>
-     <input type="text" size="20" id="username" name="username"/>
-     <br/>
-     <label for="password">Password:</label>
-     <input type="password" size="20" id="passowrd" name="password"/>
-     <br/>
-     <input type="submit" value="Login"/>
-   </form>
-   
-   <hr />
-   <p>No account, <?=anchor("","register", 'id="register"')?> one!</p>
-   <div id="create_account" style="border: solid 2px gray;
-		position: fixed;
-		left: 50%;
-		top: 50%;
-		background-color: white;
-		z-index: 100;
-
-		height: 120px;
-		margin-top: -200px;
-
-		width: 360px;
-		margin-left: -300px;
-		padding: 20px;
-		display:none;">
+	
+   <div class="container_12"> 	
+		<div class="grid_12">
+		   <h1>Simple Login with CodeIgniter</h1>
+		   <?= validation_errors() ?>
+		   <?= $message ?>
+		</div>		
+		<div class="clear"></div>
 		
+		<?php echo form_open('Login/login'); ?>
+			<div class="grid_1">
+				<label for="username">Username:</label>
+			</div>
+			<div class="grid_11">
+				<input type="text" size="20" id="username" name="username"/>
+			</div>
+			<div class="grid_1">
+				<label for="password">Password:</label>
+			</div>
+			<div class="grid_11">
+				<input type="password" size="20" id="passowrd" name="password"/>
+			</div>
+			<div class="grid_1">
+				<input type="submit" value="Login"/>
+			</div>
+			<div class="clear"></div>
+		</form>
+		
+		<div class="grid_12">
+			<hr />
+			<p>No account, <?=anchor("","register", 'id="register"')?> one!</p>
+		</div>		   
+	</div>
+	
+	<div id="create_account">				
 		<b>Choose Username and password for your account:</b>
 		<br />
 		<br />
@@ -57,6 +63,6 @@
 
 			<input type="submit" value="Create"/>
 		</form>
-   </div>
+	</div>
  </body>
 </html>
