@@ -28,6 +28,7 @@ class Books_model extends CI_Model {
 		$data['available']	= 'Available';	
 		$data['summary']	= 'Summary';
 		$data['forminput']  = 'Form Input';
+		$data['error']		= '';
 		$data['fid']['value']       = 0;
 		$data['fyear']['value']     = 0;
 

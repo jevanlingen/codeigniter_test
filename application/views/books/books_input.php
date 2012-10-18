@@ -13,10 +13,12 @@
 				<? $this->load->view('books/books_menu'); ?>
 			</div>
 			<? echo heading($forminput,3) ?>
+			<?= validation_errors() ?>
+			<?= $error ?>
 		</div>
 		<div class="clear"></div>
 		
-		<? echo form_open('books/input'); ?>
+		<? echo form_open_multipart('books/input'); ?>
 		<? echo form_hidden('id',$fid['value']); ?>
 			<div class="grid_1">
 				<label for="<?=$title?>"><?=$title?>:</label>
@@ -53,6 +55,12 @@
 			</div>
 			<div class="grid_11">
 				<?=form_textarea($fsummary)?>
+			</div>
+			<div class="grid_1">
+				<label for="image_of_book">Image:</label>
+			</div>
+			<div class="grid_11">
+				<input type="file" name="userfile" size="20" />
 			</div>
 			<div class="grid_1">
 				<?=form_submit('mysubmit','Submit!')?>
